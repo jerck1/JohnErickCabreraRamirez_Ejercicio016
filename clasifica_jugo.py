@@ -91,11 +91,12 @@ print(np.shape(train))
 print(np.shape(train_ran))
 
 
-# In[105]:
+# In[120]:
 
 
+N=16
 F1_score_av=np.zeros(10)
-Fea_imp_av=np.zeros((10,16))
+Fea_imp_av=np.zeros((10,N))
 for i in range(100):
     train_ran=bootstrap_resample(np.array(train))
     F1_score=[]
@@ -128,19 +129,20 @@ print(np.shape(F1_score_av))
 print(np.shape(Fea_imp_av[:,0]))
 
 
-# In[109]:
+# In[121]:
 
 
-plt.plot(np.arange(1,11),F1_score_av)
+plt.scatter(np.arange(1,11),F1_score_av)
 plt.savefig("f1_score.png")
 
 
-# In[117]:
+# In[127]:
 
 
-for i in range(16):
-    plt.plot(np.arange(1,11),Fea_imp_av[:,0])
-plt.savefig("fea_imp.png")
+#plt.figure
+for i in range(N):
+    plt.scatter(np.arange(1,11),Fea_imp_av[:,0],label="{}".format(i))
+#plt.savefig("fea_imp.png")
 
 
 # In[ ]:
