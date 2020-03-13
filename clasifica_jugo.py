@@ -91,7 +91,7 @@ print(np.shape(train))
 print(np.shape(train_ran))
 
 
-# In[96]:
+# In[105]:
 
 
 F1_score_av=np.zeros(10)
@@ -112,31 +112,39 @@ for i in range(100):
         Fea_imp=np.append(Fea_imp,clf.feature_importances_)
     #    print("imp ",clf.feature_importances_)
  #       print(np.shape(F1_score))
- #       print(np.shape(Fea_imp))
-        F1_score_av[j-1]= F1_score
-        Fea_imp_av[j-1]=Fea_imp
+  #      print(np.shape(Fea_imp))
+        F1_score_av[j-1]+= F1_score
+        Fea_imp_av[j-1]+=Fea_imp
         F1_score=[]
         Fea_imp=[]
-    
+F1_score_av= F1_score_av/100
+Fea_imp_av=Fea_imp_av/100    
 
 
-# In[92]:
+# In[113]:
 
 
-print(np.shape(F1_score))
-print(np.shape(Fea_imp))
+print(np.shape(F1_score_av))
+print(np.shape(Fea_imp_av[:,0]))
 
 
-# In[101]:
+# In[109]:
 
 
-plt.plot(np.arange(10),F1_score_av)
-plt.savefig
+plt.plot(np.arange(1,11),F1_score_av)
+plt.savefig("f1_score.png")
+
+
+# In[117]:
+
+
+for i in range(16):
+    plt.plot(np.arange(1,11),Fea_imp_av[:,0])
+plt.savefig("fea_imp.png")
 
 
 # In[ ]:
 
 
-plt.plot(np.arange(10),F1_score_av)
-plt.savefig
+
 
