@@ -91,27 +91,47 @@ print(np.shape(train))
 print(np.shape(train_ran))
 
 
-# In[86]:
+# In[96]:
 
 
-F1_score=[]
-Fea_imp=[]
+F1_score_av=np.zeros(10)
+Fea_imp_av=np.zeros((10,16))
+for i in range(100):
+    train_ran=bootstrap_resample(np.array(train))
+    F1_score=[]
+    Fea_imp=[]
+    for j in range(1,11):
+        clf = sklearn.tree.DecisionTreeClassifier(max_depth=j)
+    #    print(clf)
+        clf.fit(train_ran,y_train)
+    #    plt.figure(figsize=(10,10))
+    #    _= sklearn.tree.plot_tree(clf)
+        clf.predict(train_ran)
+        F1_score=np.append(F1_score,sklearn.metrics.f1_score(y_train, clf.predict(train_ran)))
+    #    print("f1: ",sklearn.metrics.f1_score(y_train, clf.predict(X)))
+        Fea_imp=np.append(Fea_imp,clf.feature_importances_)
+    #    print("imp ",clf.feature_importances_)
+ #       print(np.shape(F1_score))
+ #       print(np.shape(Fea_imp))
+        F1_score_av[j-1]= F1_score
+        Fea_imp_av[j-1]=Fea_imp
+        F1_score=[]
+        Fea_imp=[]
+    
 
 
-# In[87]:
+# In[92]:
 
 
-for i in range(1,11):
-    clf = sklearn.tree.DecisionTreeClassifier(max_depth=i)
-#    print(clf)
-    clf.fit(train_ran,y_train)
-#    plt.figure(figsize=(10,10))
-#    _= sklearn.tree.plot_tree(clf)
-    clf.predict(train_ran)
-    F1_score=np.append(F1_score,sklearn.metrics.f1_score(y_train, clf.predict(X)))
-#    print("f1: ",sklearn.metrics.f1_score(y_train, clf.predict(X)))
-    Fea_imp=np.append(Fea_imp,clf.feature_importances_)
-#    print("imp ",clf.feature_importances_)
+print(np.shape(F1_score))
+print(np.shape(Fea_imp))
+
+
+# In[101]:
+
+
+plt.plot(np.arange(10),F1_score_av)
+plt.savefig
 
 
 # In[ ]:
