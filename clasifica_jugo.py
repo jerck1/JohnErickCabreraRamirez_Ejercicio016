@@ -137,5 +137,6 @@ plt.savefig
 # In[ ]:
 
 
-
+plt.plot(np.arange(10),F1_score_av)
+plt.savefig
 
