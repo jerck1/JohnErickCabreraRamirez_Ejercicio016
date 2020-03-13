@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 
 import numpy as np
@@ -12,7 +12,7 @@ from pandas.plotting import scatter_matrix
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
-# In[53]:
+# In[3]:
 
 
 import sklearn.metrics
@@ -26,7 +26,7 @@ from sklearn.metrics import f1_score
 import sklearn.tree
 
 
-# In[30]:
+# In[4]:
 
 
 # Carga datos
@@ -54,13 +54,13 @@ predictors.remove('Unnamed: 0')
 #print(data)
 
 
-# In[31]:
+# In[5]:
 
 
 train, test, y_train, y_test = train_test_split(data, data["Target"], train_size=0.5)
 
 
-# In[50]:
+# In[6]:
 
 
 def bootstrap_resample(X, n=None):
@@ -83,7 +83,7 @@ def bootstrap_resample(X, n=None):
     return X_resample
 
 
-# In[65]:
+# In[7]:
 
 
 train_ran=bootstrap_resample(np.array(train))
@@ -91,7 +91,7 @@ print(np.shape(train))
 print(np.shape(train_ran))
 
 
-# In[120]:
+# In[8]:
 
 
 N=16
@@ -122,27 +122,33 @@ F1_score_av= F1_score_av/100
 Fea_imp_av=Fea_imp_av/100    
 
 
-# In[113]:
+# In[9]:
 
 
 print(np.shape(F1_score_av))
 print(np.shape(Fea_imp_av[:,0]))
 
 
-# In[121]:
+# In[10]:
 
 
 plt.scatter(np.arange(1,11),F1_score_av)
 plt.savefig("f1_score.png")
 
 
-# In[127]:
+# In[11]:
 
 
 #plt.figure
 for i in range(N):
     plt.scatter(np.arange(1,11),Fea_imp_av[:,0],label="{}".format(i))
 #plt.savefig("fea_imp.png")
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
